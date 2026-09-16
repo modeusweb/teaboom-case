@@ -16,6 +16,8 @@ body {
   line-height: 24px;
   color: #444;
   background-color: #fbfbfb;
+  background-image: url("../img/pattern.webp");
+  background-repeat: repeat;
 }
 
 h1,

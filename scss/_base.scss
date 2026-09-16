@@ -20,6 +20,8 @@ body {
   line-height: $line-height-base;
   color: $color-text;
   background-color: $color-page;
+  background-image: url("../img/pattern.webp");
+  background-repeat: repeat;
 }
 
 h1,
