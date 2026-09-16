@@ -443,8 +443,8 @@ button {
   margin-top: 16px;
 }
 @media (max-width: 767px) {
-  .brew-list__item:last-child:nth-child(odd) {
-    grid-column: 1/-1;
+  .brew-list {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 .brew-list__item {

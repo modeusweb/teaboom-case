@@ -119,11 +119,9 @@
   gap: 8px;
   margin-top: 16px;
 
-  // На узких экранах последняя плитка занимает всю ширину строки
+  // На узких экранах плитки во всю ширину, по одной на строку
   @include until($bp-tablet) {
-    &__item:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
-    }
+    grid-template-columns: minmax(0, 1fr);
   }
 
   &__item {
