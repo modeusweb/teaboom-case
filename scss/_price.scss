@@ -1,0 +1,40 @@
+// Цена: актуальная, старая (зачёркнутая), бейдж скидки
+
+@use "variables" as *;
+@use "mixins" as *;
+
+.price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-top: 20px;
+
+  &__current {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: $color-price;
+
+    @include from($bp-tablet) {
+      font-size: 34px;
+    }
+  }
+
+  &__old {
+    font-size: 16px;
+    color: $color-muted;
+    text-decoration: line-through;
+  }
+
+  &__discount {
+    align-self: center;
+    padding: 3px 8px;
+    border-radius: $radius-sm;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: $color-sale;
+    background-color: $color-sale-bg;
+  }
+}

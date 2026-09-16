@@ -1,0 +1,44 @@
+// Палитра и типографика — со страницы товара на teaboom.ru
+
+// Цвета
+$color-ink: #202020; // тёмный акцент: заголовки, текст на акцентном фоне
+$color-text: #444; // основной текст
+$color-muted: #999; // второстепенный текст, старая цена
+$color-white: #fff;
+$color-page: #fbfbfb; // фон страницы
+$color-surface: #f6f7f8; // фон плашек и невыбранных опций
+$color-line: #e4e4e4; // линии и рамки
+$color-line-soft: #f0f0f0; // мягкие линии (как в теме Teaboom)
+$color-line-hover: #cbcbcb; // рамка при наведении
+$color-accent: #f5d730; // акцентный жёлтый «Чайного Бума»
+$color-price: #202020; // актуальная цена
+$color-sale: #d8362a; // скидка
+$color-sale-bg: #fdecea; // фон бейджа скидки
+$color-success: #28a745; // «в наличии»
+
+// Типографика
+$font-base:
+  "Open Sans",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Roboto,
+  Arial,
+  sans-serif;
+$font-size-base: 14px;
+$line-height-base: 24px;
+
+// Скругления, тени, переходы
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-pill: 50px;
+$shadow-card: 0 1px 2px rgba($color-ink, 0.05);
+$shadow-pop: 0 2px 8px rgba($color-ink, 0.08);
+$transition-base: 0.2s ease;
+$transition-slow: 0.35s ease;
+
+// Точки перелома
+$bp-mobile: 375px;
+$bp-tablet: 768px;
+$bp-laptop: 992px;
+$bp-desktop: 1200px;

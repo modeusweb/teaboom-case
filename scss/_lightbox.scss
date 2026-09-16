@@ -1,0 +1,112 @@
+// Лайтбокс на <dialog>: открытие/закрытие в main.js, здесь — стили и анимации
+
+@use "variables" as *;
+@use "mixins" as *;
+
+.lightbox {
+  // Сброс встроенных стилей диалога: окно точно по размеру фото
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+
+  // прозрачность 0 в закрытом состоянии; allow-discrete нужен, чтобы
+  // анимировалось и закрытие (display и overlay)
+  opacity: 0;
+  transition:
+    opacity 0.25s ease,
+    overlay 0.25s ease allow-discrete,
+    display 0.25s ease allow-discrete;
+
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    color: $color-ink;
+    background-color: $color-white;
+    box-shadow: 0 2px 6px rgba($color-ink, 0.18);
+    cursor: pointer;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      transform $transition-base;
+
+    @include hover-device {
+      &:hover {
+        color: $color-white;
+        background-color: $color-ink;
+      }
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-white;
+      outline-offset: 3px;
+    }
+  }
+
+  &__image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(92vw, 800px);
+    max-height: 88vh;
+    border-radius: $radius-md;
+    box-shadow: $shadow-pop;
+
+    // Закрытое состояние: чуть уменьшено, «выезжает» при открытии
+    transform: scale(0.94);
+    transition: transform 0.25s ease;
+  }
+
+  // Подложка за модальным окном: тёмная, анимируется вместе с диалогом
+  &::backdrop {
+    background-color: rgba($color-ink, 0.62);
+    opacity: 0;
+    transition:
+      opacity 0.25s ease,
+      overlay 0.25s ease allow-discrete,
+      display 0.25s ease allow-discrete;
+  }
+
+  // Открытое состояние
+  &[open] {
+    opacity: 1;
+  }
+
+  &[open]::backdrop {
+    opacity: 1;
+  }
+
+  &[open] &__image {
+    transform: scale(1);
+  }
+}
+
+// Точка старта анимации открытия (плоская форма — надёжнее вложенной)
+@starting-style {
+  .lightbox[open] {
+    opacity: 0;
+  }
+
+  .lightbox[open]::backdrop {
+    opacity: 0;
+  }
+
+  .lightbox[open] .lightbox__image {
+    transform: scale(0.94);
+  }
+}

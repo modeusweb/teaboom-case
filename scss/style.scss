@@ -1,0 +1,10 @@
+// Точка входа SCSS. Сборка: npm run build:css -> assets/css/style.css
+
+@use "base";
+@use "layout";
+@use "buttons";
+@use "price";
+@use "packaging";
+@use "product-card";
+@use "gallery";
+@use "lightbox";

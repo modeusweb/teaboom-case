@@ -1,0 +1,79 @@
+// Кнопки: «пилюля» как на teaboom.ru — при наведении цвета меняются местами
+
+@use "variables" as *;
+@use "mixins" as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 26px 8px 8px;
+  border: 0;
+  border-radius: $radius-pill;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform $transition-base;
+
+  &:focus-visible {
+    outline: 2px solid $color-ink;
+    outline-offset: 3px;
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: $color-ink;
+    background-color: $color-white;
+    box-shadow: 0 2px 6px rgba($color-ink, 0.18);
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
+  }
+}
+
+.btn--cart {
+  width: 100%;
+  color: $color-ink;
+  background-color: $color-accent;
+  box-shadow: 0 2px 12px rgba($color-accent, 0.5);
+
+  @include hover-device {
+    &:hover {
+      color: $color-accent;
+      background-color: $color-ink;
+      box-shadow: 0 4px 14px rgba($color-ink, 0.25);
+    }
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  // Состояние после нажатия: товар «добавлен»
+  &.is-added {
+    color: $color-accent;
+    background-color: $color-ink;
+  }
+
+  @include from($bp-tablet) {
+    width: auto;
+    min-width: 260px;
+  }
+}

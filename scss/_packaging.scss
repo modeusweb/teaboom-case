@@ -1,0 +1,109 @@
+// Фасовки: радиокнопки-«плитки», логика переключения в assets/js/main.js
+
+@use "variables" as *;
+@use "mixins" as *;
+
+.packaging {
+  margin-top: 22px;
+
+  &__legend {
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: $color-ink;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+
+    @include from($bp-laptop) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  &__option {
+    display: block;
+    cursor: pointer;
+  }
+
+  &__input {
+    // Скрываем нативную радиокнопку, но оставляем её доступной
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  &__box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    height: 100%;
+    padding: 10px 12px;
+    background-color: $color-surface;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    transition:
+      background-color $transition-base,
+      border-color $transition-base,
+      box-shadow $transition-base;
+  }
+
+  &__weight {
+    font-size: 15px;
+    font-weight: 700;
+    color: $color-ink;
+  }
+
+  &__price {
+    font-size: 12px;
+    color: $color-muted;
+  }
+
+  &__option:hover &__box {
+    border-color: $color-line-hover;
+  }
+
+  &__input:checked + &__box {
+    background-color: $color-white;
+    border-color: $color-ink;
+    box-shadow: $shadow-pop;
+
+    .packaging__price {
+      color: $color-ink;
+    }
+
+    // Галочка выбранной фасовки
+    &::after {
+      content: "\2713";
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 12px;
+      line-height: 20px;
+      text-align: center;
+      color: $color-ink;
+      background-color: $color-accent;
+      box-shadow: 0 1px 4px rgba($color-ink, 0.25);
+    }
+  }
+
+  &__input:focus-visible + &__box {
+    outline: 2px solid $color-ink;
+    outline-offset: 2px;
+  }
+}

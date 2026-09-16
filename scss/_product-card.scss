@@ -1,0 +1,148 @@
+// Сетка карточки, шапка с информацией, описание
+
+@use "variables" as *;
+@use "mixins" as *;
+
+.product-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  padding: 16px;
+  background-color: $color-white;
+  border: 1px solid $color-line-soft;
+  border-radius: 8px;
+  box-shadow: $shadow-card;
+
+  @include from($bp-tablet) {
+    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+    padding: 24px;
+  }
+
+  @include from($bp-desktop) {
+    grid-template-columns: minmax(0, 46%) minmax(0, 1fr);
+    gap: 48px;
+    padding: 40px;
+  }
+
+  &__media {
+    min-width: 0;
+  }
+
+  &__info {
+    min-width: 0;
+  }
+
+  &__category {
+    margin-bottom: 8px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+
+    a {
+      border-bottom: 1px solid transparent;
+
+      &:hover {
+        color: $color-ink;
+        border-bottom-color: $color-accent;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 26px;
+
+    @include from($bp-tablet) {
+      font-size: 30px;
+    }
+
+    @include from($bp-desktop) {
+      font-size: 34px;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 20px;
+    margin-top: 12px;
+    font-size: 13px;
+  }
+
+  &__meta-row {
+    display: flex;
+    gap: 6px;
+
+    dt {
+      color: $color-muted;
+    }
+
+    dd {
+      font-weight: 600;
+      color: $color-ink;
+    }
+  }
+
+  &__stock {
+    color: $color-success;
+  }
+
+  &__actions {
+    margin-top: 22px;
+  }
+
+  &__description {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid $color-line;
+  }
+
+  &__subtitle {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  &__text {
+    margin-bottom: 10px;
+  }
+
+  &__composition {
+    strong {
+      color: $color-ink;
+    }
+  }
+}
+
+.brew-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+
+  // На узких экранах последняя плитка занимает всю ширину строки
+  @include until($bp-tablet) {
+    &__item:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px;
+    background-color: $color-surface;
+    border-radius: $radius-md;
+  }
+
+  &__key {
+    font-size: 12px;
+    color: $color-muted;
+  }
+
+  &__value {
+    font-size: 14px;
+    font-weight: 600;
+    color: $color-ink;
+  }
+}

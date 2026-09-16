@@ -1,0 +1,62 @@
+// Каркас: контейнер и хлебные крошки
+
+@use "variables" as *;
+@use "mixins" as *;
+
+.page {
+  width: 100%;
+  max-width: $bp-desktop;
+  margin: 0 auto;
+  padding: 20px 15px 48px;
+
+  @include from($bp-desktop) {
+    padding-top: 32px;
+    padding-bottom: 64px;
+  }
+}
+
+.breadcrumbs {
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 18px;
+  color: $color-muted;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child)::after {
+      content: "/";
+      margin: 0 8px;
+      color: $color-line;
+    }
+
+    a:hover {
+      color: $color-ink;
+    }
+
+    &[aria-current="page"] {
+      font-weight: 600;
+      color: $color-ink;
+    }
+  }
+
+  // На узких экранах оставляем только последние две крошки
+  @include until($bp-tablet) {
+    &__item:nth-last-child(2)::before {
+      content: "…";
+      margin-right: 8px;
+      color: $color-line;
+    }
+
+    &__item:not(:nth-last-child(-n + 2)) {
+      display: none;
+    }
+  }
+}

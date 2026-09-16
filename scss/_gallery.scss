@@ -1,0 +1,92 @@
+// Галерея: главное фото + миниатюры. Переключение кадров — main.js
+
+@use "variables" as *;
+@use "mixins" as *;
+
+.product-gallery {
+  display: grid;
+  gap: 10px;
+
+  // Главное фото: клик открывает лайтбокс
+  &__zoom {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    border-radius: $radius-md;
+    overflow: hidden;
+    cursor: zoom-in;
+
+    &:focus-visible {
+      outline: 2px solid $color-ink;
+      outline-offset: 3px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition:
+      transform $transition-slow,
+      opacity $transition-base;
+
+    // Кадр подменяется: коротко гасим и плавно проявляем обратно
+    &.is-swapping {
+      opacity: 0;
+    }
+  }
+
+  // зум только на главном фото, не на миниатюрах
+  @include hover-device {
+    &__zoom:hover &__image {
+      transform: scale(1.04);
+    }
+  }
+
+  // Миниатюры: сетка на 4 ячейки, пока заполнены две
+  &__thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  &__thumb {
+    padding: 0;
+    border: 1px solid $color-line-soft;
+    border-radius: $radius-sm;
+    background: none;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    transition:
+      border-color $transition-base,
+      opacity $transition-base;
+
+    @include hover-device {
+      &:hover {
+        opacity: 1;
+        border-color: $color-line-hover;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-ink;
+      outline-offset: 2px;
+    }
+
+    // Выбранная миниатюра
+    &.is-active {
+      opacity: 1;
+      border-color: $color-ink;
+    }
+  }
+
+  &__thumb-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+}

@@ -1,0 +1,22 @@
+// Миксины media-запросов
+
+// от указанной ширины и шире (mobile-first)
+@mixin from($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// до указанной ширины (точечные мобильные правки)
+@mixin until($breakpoint) {
+  @media (max-width: ($breakpoint - 1px)) {
+    @content;
+  }
+}
+
+// только устройства с курсором
+@mixin hover-device {
+  @media (hover: hover) {
+    @content;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "teaboom-product-card",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Тестовое задание: верхняя часть карточки товара «Ананасовый улун» для интернет-магазина Teaboom.ru",
+  "keywords": [
+    "html",
+    "scss",
+    "javascript",
+    "product-card",
+    "teaboom"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build:css": "sass --no-source-map --style=expanded scss/style.scss assets/css/style.css",
+    "watch:css": "sass --watch --no-source-map --style=expanded scss/style.scss assets/css/style.css",
+    "format": "prettier --write \"index.html\" \"scss/**/*.scss\" \"assets/js/**/*.js\" \"*.json\" \"*.md\"",
+    "format:check": "prettier --check \"index.html\" \"scss/**/*.scss\" \"assets/js/**/*.js\" \"*.json\" \"*.md\"",
+    "check:js": "node --check assets/js/main.js"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "sass": "^1.94.0"
+  }
+}

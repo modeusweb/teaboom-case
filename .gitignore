@@ -1,0 +1,19 @@
+# Зависимости
+node_modules/
+package-lock.json
+
+# Служебные файлы редакторов
+.vscode/
+.idea/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Логи
+*.log
+npm-debug.log*
+
+# Source maps (сборка идёт с --no-source-map)
+assets/css/*.map
