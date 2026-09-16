@@ -546,6 +546,7 @@ button {
 }
 .lightbox__close {
   position: absolute;
+  z-index: 10;
   top: 12px;
   right: 12px;
   display: grid;
