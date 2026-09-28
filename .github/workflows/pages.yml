@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Один деплой за раз, не отменяем текущий на середине
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+
+      # package-lock.json в .gitignore, поэтому npm ci не подходит
+      - name: Install deps
+        run: npm install --no-audit --no-fund
+
+      - name: Check JS
+        run: npm run check:js
+
+      - name: Build CSS
+        run: npm run build:css
+
+      # Pages должен быть уже включён: Settings -> Pages -> Source: GitHub Actions
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # На Pages попадает только статика, без node_modules и исходников
+      - name: Collect static files
+        run: |
+          mkdir -p _site/assets
+          cp index.html favicon.ico _site/
+          cp -r assets/css assets/js assets/img _site/assets/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: '_site'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
